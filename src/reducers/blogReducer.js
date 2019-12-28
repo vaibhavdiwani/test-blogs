@@ -56,11 +56,23 @@ export default function (state = initialState, action = {}) {
         filteredItems = filteredItems.filter((item) => {
           return item[action.payload.field].toLowerCase().includes(action.payload.filterText.toLowerCase());
         });
+
+        if (filterByCategory) {
+          filteredItems = filteredItems.filter((item) => {
+            return item.category.toLowerCase().includes(filterByCategory.toLowerCase());
+          });
+        }
       } else if (action.payload.field === 'category') {
         filterByCategory = action.payload.filterText;
         filteredItems = filteredItems.filter((item) => {
           return item[action.payload.field].toLowerCase().includes(action.payload.filterText.toLowerCase());
         });
+
+        if (filterByAuthor) {
+          filteredItems = filteredItems.filter((item) => {
+            return item.author.toLowerCase().includes(filterByAuthor.toLowerCase());
+          });
+        }
       }
       return {
         ...state,

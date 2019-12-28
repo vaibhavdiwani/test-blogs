@@ -2,7 +2,7 @@ import { FETCH_BLOGS, SET_DISPLAY_ITEM_COUNT, SET_SORT_BY_FIELD, SET_FILTER, SET
 
 function fetchBlogs() {
   return (dispatch) => {
-    fetch('/blogs.json')
+    fetch(`${process.env.PUBLIC_URL}/blogs.json`)
       .then(res => res.json())
       .then(blogs => dispatch({
         type: FETCH_BLOGS,
