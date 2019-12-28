@@ -111,7 +111,7 @@ class BlogDetails extends Component {
               </div>
             </Col>
             <Col>
-              <Image src="/add_placeholder.png" fluid />
+              <Image src={`${process.env.PUBLIC_URL}/add_placeholder.png`} fluid />
             </Col>
           </Row>
           {blogItems.length && (
