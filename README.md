@@ -35,5 +35,4 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
     - Once you select the sort field, data is sorted in ascending order w.r.t to selected field.
     - If user selects the same field again then data is sorted in descending order w.r.t to that field.
 5. For 'Similer Articales' section, showing all the similar category blogs, not kept any limit.
-6. User can add like n number of times.
-7. If user makes any changes to result set on listing page, then will show first 4 blogs and load more button.
+6. If user makes any changes to result set on listing page, then will show first 4 blogs and load more button.

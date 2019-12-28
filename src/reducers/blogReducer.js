@@ -1,4 +1,4 @@
-import { FETCH_BLOGS, SET_DISPLAY_ITEM_COUNT, SET_SORT_BY_FIELD, SET_FILTER, SET_LIKES } from '../actions/types';
+import { FETCH_BLOGS, SET_DISPLAY_ITEM_COUNT, SET_SORT_BY_FIELD, SET_FILTER, SET_LIKES, SET_LIKED_ITEMS } from '../actions/types';
 
 const initialState = {
   allItems: [],
@@ -7,7 +7,8 @@ const initialState = {
   filterByCategory: '',
   sortBy: '',
   sortOrder: '',
-  itemsToDisplay: 0
+  itemsToDisplay: 0,
+  likedItems: []
 }
 
 export default function (state = initialState, action = {}) {
@@ -50,7 +51,7 @@ export default function (state = initialState, action = {}) {
       }
     case SET_FILTER:
       let filteredItems = [...state.allItems];
-      let {filterByAuthor, filterByCategory} = state; 
+      let { filterByAuthor, filterByCategory } = state;
       if (action.payload.field === 'author') {
         filterByAuthor = action.payload.filterText;
         filteredItems = filteredItems.filter((item) => {
@@ -81,23 +82,31 @@ export default function (state = initialState, action = {}) {
         filterByCategory,
       }
     case SET_LIKES:
+      const likedItems = [...state.likedItems];
+      let newLikedItem = false;
       const items = [...state.items].map(item => {
-        if (action.payload.id === item.id) {
+        if (action.payload.id === item.id && !likedItems.includes(action.payload.id)) {
           item.likes = action.payload.likes;
+          newLikedItem = true;
         }
         return item;
       });
       const allItems = [...state.allItems].map(item => {
-        if (action.payload.id === item.id) {
+        if (action.payload.id === item.id && !likedItems.includes(action.payload.id)) {
           item.likes = action.payload.likes;
+          newLikedItem = true;
         }
         return item;
       });
+      if (newLikedItem) {
+        likedItems.push(action.payload.id);
+      }
 
       return {
         ...state,
         items,
-        allItems
+        allItems,
+        likedItems
       }
     default:
       return state;

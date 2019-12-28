@@ -1,4 +1,4 @@
-import { FETCH_BLOGS, SET_DISPLAY_ITEM_COUNT, SET_SORT_BY_FIELD, SET_FILTER, SET_LIKES } from './types';
+import { FETCH_BLOGS, SET_DISPLAY_ITEM_COUNT, SET_SORT_BY_FIELD, SET_FILTER, SET_LIKES, SET_LIKED_ITEMS } from './types';
 
 function fetchBlogs() {
   return (dispatch) => {
@@ -48,4 +48,13 @@ function setLikes(id, likes) {
   }
 }
 
-export { fetchBlogs, setDisplayItemCount, setSortBy, setFilterBy, setLikes };
+function setLikedItem(itemId) {
+  return {
+    type: SET_LIKED_ITEMS,
+    payload: {
+      itemId
+    }    
+  }
+}
+
+export { fetchBlogs, setDisplayItemCount, setSortBy, setFilterBy, setLikes, setLikedItem };

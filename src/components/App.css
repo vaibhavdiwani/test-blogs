@@ -47,3 +47,7 @@
   border-color: #dc5f1d;
   box-shadow: 0 0 0 0.2rem #dc5f1d;
 }
+
+.btn-success.disabled, .btn-success:disabled {
+  cursor: not-allowed;
+}

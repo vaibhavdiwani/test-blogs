@@ -34,7 +34,7 @@ class BlogDetails extends Component {
   }
 
   render() {
-    const { currItem, similarItems } = this.props;
+    const { currItem, similarItems, hasLikedItems } = this.props;
     if (!currItem.id) {
       return <Row>
         <Col>
@@ -84,12 +84,17 @@ class BlogDetails extends Component {
                   {currItem.likes} likes
                 </div>
                 <div className="float-right">
-                  <span className="d-inline-block">Liked the Articale? Hit like button</span>
+                  <span className="d-inline-block">
+                    {hasLikedItems
+                    ? (`You liked the Articale`) 
+                    : (`Liked the Articale? Hit like button`)}
+                  </span>
                   <ButtonToolbar className="d-inline-block ml-2">
                     <Button
-                      variant="primary"
-                      className="like-btn"
+                      variant={hasLikedItems ? 'success' : 'primary'}
+                      className={hasLikedItems ? '' : 'like-btn'}
                       onClick={this.handleLikeClick}
+                      disabled={hasLikedItems}
                     >
                       <svg
                         className="bi bi-heart-fill mr-1"
@@ -104,7 +109,7 @@ class BlogDetails extends Component {
                           clipRule="evenodd"
                         ></path>
                       </svg>
-                      Like
+                      {hasLikedItems ? 'Liked' : 'Like'}
                     </Button>
                   </ButtonToolbar>
                 </div>
@@ -142,6 +147,7 @@ const mapStateToProps = (state, ownProps) => {
   }
   return {
     allItems: state.blogs.allItems,
+    hasLikedItems: state.blogs.likedItems && state.blogs.likedItems.includes(currItem.id),
     similarItems,
     currItem
   }
